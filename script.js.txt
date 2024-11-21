@@ -1,0 +1,103 @@
+const projects = [
+  {
+    title: "T-Shirt Tote Bag",
+    description: "Turn an old T-shirt into a reusable tote bag.",
+    image: "https://i.postimg.cc/m216y7tW/Making-a-tote-bag-out-of-a-t-shirt.jpg",
+    instructions: [
+      "Cut off the sleeves and neckline of the T-shirt.",
+      "Turn the T-shirt inside out and sew the bottom shut.",
+      "Turn it back to the right side and you have a tote bag!",
+    ],
+  },
+  {
+    title: "Plastic Bottle Planter",
+    description: "Upcycle a plastic bottle into a beautiful planter.",
+    image: "https://i.postimg.cc/D0qmVnhc/d52a54c00d0a21e6ea0aa7a8d4154fa8.jpg",
+    instructions: [
+      "Cut the plastic bottle in half",
+      "Decorate the outer surface with paint or stickers.",
+      "Fill the bottom part with soil and add a plant.",
+    ],
+  },
+  {
+    title: "Cork Coasters",
+    description: "Use old wine corks to create custom coasters.",
+    image: "https://i.postimg.cc/dtWK96h0/a172299232eea066597283e941d3d812.jpg",
+    instructions: [
+      "Cut wine corks into thin slices.",
+      "Glue the slices together in a circular shape.",
+      "Let it dry and use as a coaster.",
+    ],
+  },
+  {
+    title: "Denim Organizer",
+    description: "Transform old jeans into a handy organizer.",
+    image: "https://i.postimg.cc/CKRkcwSQ/d772c53a0241ee7b3a2cf89f3f159568.jpg",
+    instructions: [
+      "Cut the back pockets from an old pair of jeans.",
+      "Sew or glue them onto a fabric backing.",
+      "Hang the backing on a wall for organizing small items.",
+    ],
+  },
+  {
+    title: "Tin Can Lanterns",
+    description: "Make decorative lanterns from tin cans.",
+    image: "https://i.postimg.cc/cHVpv1Ly/c1c4b250836ab84798b8a46598b15729.jpg",
+    instructions: [
+      "Wash and remove labels from the tin cans.",
+      "Punch holes in the sides to create a design.",
+      "Place a candle or LED light inside.",
+    ],
+  },
+  {
+    title: "Cardboard Photo Frame",
+    description: "Create a photo frame using old cardboard.",
+    image: "https://i.postimg.cc/VNNvRgBs/8ce73406190ded1f9cd9a883762830bc.jpg",
+    instructions: [
+      "Cut two identical rectangles out of cardboard.",
+      "Cut a smaller rectangle out of the center of one piece.",
+      "Glue the two pieces together, leaving the top open for a photo.",
+    ],
+  },
+];
+
+const gridContainer = document.querySelector('.grid-container');
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalInstructions = document.getElementById('modal-instructions');
+const closeModal = document.querySelector('.close');
+
+projects.forEach((project, index) => {
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  card.innerHTML = `
+    <img src="${project.image}" alt="${project.title}">
+    <div class="card-content">
+      <h3>${project.title}</h3>
+      <p>${project.description}</p>
+      <button onclick="showInstructions(${index})">Instructions</button>
+    </div>
+  `;
+
+  gridContainer.appendChild(card);
+});
+
+function showInstructions(index) {
+  const project = projects[index];
+  modalTitle.textContent = project.title;
+  modalInstructions.innerHTML = project.instructions
+    .map(step => `<li>${step}</li>`)
+    .join('');
+  modal.style.display = 'flex';
+}
+
+closeModal.onclick = () => {
+  modal.style.display = 'none';
+};
+
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+};
